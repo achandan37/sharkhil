@@ -8,7 +8,12 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,800&display=swap" rel="stylesheet">
 </head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.js"></script>
@@ -17,19 +22,52 @@
 
 <script>
     $(document).ready(()=>{
-        // Create Animation for 0.5s
-        var tween = TweenMax.to('#header', 4, {
-            backgroundPositionY: '47%',
+        // Add smooth scrolling to all links
+        $("a").on('click', function(event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                var hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 2500, function(){
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            } // End if
         });
-        var tween2 = TweenMax.to('#header', 4, {
-            opacity:0.6
+
+        // Create Animation for 0.5s
+        var tween = TweenMax.fromTo('#header', 4, {
+            transform:'scale(1)'
+        },{
+            transform:'scale(1.2)'
+        });
+        var tween2 = TweenMax.fromTo('#header', 4, {
+            backgroundPositionY: '50%',
+        },{
+            backgroundPositionY: '30%',
         });
         var tween3 = TweenMax.to('#headerText', 4, {
             position: 'absolute',
             left: 0,
             right: 0,
-            top: '142px'
+            bottom: '0px'
         })
+        var tween4 = TweenMax.fromTo('#header', 4, {
+            position:'initial',
+            top:'-70vh'
+        },{
+            position: 'fixed',
+            top:'-70vh  '
+        });
         var controller = new ScrollMagic.Controller({addIndicators: true});
         // create a scene
         new ScrollMagic.Scene({
@@ -45,7 +83,7 @@
         .addTo(controller);
         new ScrollMagic.Scene({
             offset:1000,
-            duration: 200 /* How many pixels to scroll / animate */    
+            duration: 1000 /* How many pixels to scroll / animate */    
         })
         .setTween(tween2)
         .addTo(controller);
@@ -54,6 +92,12 @@
             duration: 200 /* How many pixels to scroll / animate */    
         })
         .setTween(tween3)
+        .addTo(controller);
+        new ScrollMagic.Scene({
+            offset:1600,
+            duration: 5000 /* How many pixels to scroll / animate */    
+        })
+        .setTween(tween4)
         .addTo(controller);
 
         // Set the date we're counting down to
@@ -87,14 +131,93 @@
     })
 </script>
 <body>
+    <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">RSVP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Wedding Party</a>
+            </li>
+            <img id="sa" src="assets/SA.png"/>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Registry</a>
+            </li>
+        </ul>
     <div id="header-bg">
         <div id="header">
-                <div id="headerText">
-                    <h1>Akhil & Sharan</h1>
-                    <p>WE ARE GETTING MARRIED MARCH 28, 2020</p>
-                    <p id="demo"></p>
+            <div id="headerText">
+                <h1>Akhil & Sharan</h1>
+                <p>WE ARE GETTING MARRIED MARCH 28, 2020</p>
+                <p id="demo"></p>
+                <a href="#timeline"><img src="assets/scroll.png" id="scroll"></a>
+            </div>
+        </div>
+    </div>
+    <div class="timeline" id="timeline">
+        <h2>Our Story</h2>
+        <img class="hearts" src="assets/noun_Hearts_1225265.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 timelineLeft">
+                    <h3>2017</h3>
+                    <h4>Met for the first time</h4>
+                    <p>Sharan and Akhil met through a common friend, Jimmy, who is one of the groomsmen!</p>
+                </div>
+                <div class="col-md-6 timelineRight">
+                    
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 timelineLeft alignCenter">
+                    <img class="timelineLogo" src="assets/noun_valentine's day_1559402.png">
+                </div>
+                <div class="col-md-3 timelineRight">
+                    <h3>2018</h3>
+                    <h4>First Facebook message</h4>
+                    <p>Akhil reached out to Sharan on FB to get her opinion on Bellingham, where he was moving to and where she attended college. This message opened the door to a long lasting friendship.</p>
+                    <br>
+                    <h4>Akhil surprised Sharan with a trip to Disneyland</h4>
+                    <p>Sharan was getting ready to move out of Los Angeles in June and was stressed with the move back, finding a new job, and so on. Akhil surprised her with a trip to Disneyland and asked her out during the Fireworks show next to It’s A Small World. Sharan said yes!</p>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 timelineLeft alignCenter">
+                    <h3>2019</h3>
+                    <h3>London</h3>
+                    <h4>Sharan and Akhil’s first Int’l Trip together</h4>
+                    <p>Sharan and Akhil were excited to go on a trip to London with their close friends, Sarina and Rich! They all were planning this day for months and the trip had finally come!</p>
+                </div>
+                <div class="col-md-3 timelineRight">
+                    <img class="timelineLogo" src="assets/noun_Champagne_1233677.png">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 timelineLeft alignCenter">
+                    <img class="timelineLogo" src="assets/noun_diamond ring_1241527.png">
+                </div>
+                <div class="col-md-3 timelineRight">
+                        <h3>Engaged!</h3>
+                        <h4>Sharan said yes</h4>
+                        <p>Akhil organized an amazing proposal at an Escape Room in London. Sharan was caught completely off guard and couldn’t believe it! But of course she said yes :) Watch the reaction video below in the Gallery!</p>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+        <img class="hearts" src="assets/noun_Hearts_1225265.png">
     </div>
 </body>
 </html>
