@@ -22,9 +22,15 @@
 
 <script>
     $(document).ready(()=>{
+        $(".comingsoon").on('click', function() {
+            event.preventDefault();
+            alert("Coming soon!")
+        });
+
         // Add smooth scrolling to all links
-        $("a").on('click', function(event) {
+        $("#RSVPButton").on('click', function(event) {
             // Make sure this.hash has a value before overriding default behavior
+            var topOffset = $("#RSVP").offset().top;
             if (this.hash !== "") {
                 // Prevent default anchor click behavior
                 event.preventDefault();
@@ -35,9 +41,9 @@
                 // Using jQuery's animate() method to add smooth page scroll
                 // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
                 $('html, body').animate({
-                    scrollTop: $(hash).offset().top
+                    scrollTop: $("#RSVP").offset().top
                 }, 2500, function(){
-
+                    console.log(topOffset);
                     // Add hash (#) to URL when done scrolling (default click behavior)
                     window.location.hash = hash;
                 });
@@ -68,7 +74,7 @@
             position: 'fixed',
             top:'-70vh  '
         });
-        var controller = new ScrollMagic.Controller({addIndicators: true});
+        var controller = new ScrollMagic.Controller();
         // create a scene
         new ScrollMagic.Scene({
             duration: 1000, // the scene should last for a scroll distance of 100px
@@ -133,23 +139,23 @@
 <body>
     <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active comingsoon" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">RSVP</a>
+                <a class="nav-link" id="RSVPButton" href="#RSVP">RSVP</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Wedding Party</a>
+                <a class="nav-link comingsoon" href="#">Wedding Party</a>
             </li>
             <img id="sa" src="assets/SA.png"/>
             <li class="nav-item">
-                <a class="nav-link" href="#">Gallery</a>
+                <a class="nav-link comingsoon" href="#">Gallery</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
+                <a class="nav-link comingsoon" href="#">Events</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Registry</a>
+                <a class="nav-link comingsoon" href="#">Registry</a>
             </li>
         </ul>
     <div id="header-bg">
@@ -193,14 +199,14 @@
             </div>
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3 timelineLeft alignCenter">
+                <div class="col-md-3 timelineLeft alignCenter orderMobile2">
                     <h3>2019</h3>
                     <h3>London</h3>
                     <h4>Sharan and Akhil’s first Int’l Trip together</h4>
                     <p>Sharan and Akhil were excited to go on a trip to London with their close friends, Sarina and Rich! They all were planning this day for months and the trip had finally come!</p>
                 </div>
                 <div class="col-md-3 timelineRight">
-                    <img class="timelineLogo" src="assets/noun_Champagne_1233677.png">
+                    <img class="timelineLogo orderMobile1" src="assets/noun_Champagne_1233677.png">
                 </div>
                 <div class="col-md-3"></div>
             </div>
@@ -219,5 +225,73 @@
         </div>
         <img class="hearts" src="assets/noun_Hearts_1225265.png">
     </div>
+    <div id="RSVP">
+        <h2>RSVP</h2>
+        <form id="my-form"
+        action="https://formspree.io/xeqaaabl"
+        method="POST"
+        >
+            <label>Email:</label>
+            <input type="email" name="email" /><br>
+            <label>Name:</label>
+            <input type="name" name="name" /><br>
+            <label>Number Attending:</label>
+            <input type="number" name="number" /><br>
+            <label>Message:</label>
+            <input type="text" name="message" /><br>
+            <button id="my-form-button">Submit</button>
+            <p id="my-form-status"></p>
+        </form>
+    </div>
+
+    <!-- Place this script at the end of the body tag -->
+
+    <script>
+    window.addEventListener("DOMContentLoaded", function() {
+
+        // get the form elements defined in your form HTML above
+        
+        var form = document.getElementById("my-form");
+        var button = document.getElementById("my-form-button");
+        var status = document.getElementById("my-form-status");
+
+        // Success and Error functions for after the form is submitted
+        
+        function success() {
+        form.reset();
+        button.style = "display: none ";
+        status.innerHTML = "Thanks!";
+        }
+
+        function error() {
+        status.innerHTML = "Oops! There was a problem.";
+        }
+
+        // handle the form submission event
+
+        form.addEventListener("submit", function(ev) {
+        ev.preventDefault();
+        var data = new FormData(form);
+        ajax(form.method, form.action, data, success, error);
+        });
+    });
+    
+    // helper function for sending an AJAX request
+
+    function ajax(method, url, data, success, error) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+            success(xhr.response, xhr.responseType);
+        } else {
+            error(xhr.status, xhr.response, xhr.responseType);
+        }
+        };
+        xhr.send(data);
+    }
+    </script>
 </body>
 </html>

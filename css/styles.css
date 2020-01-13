@@ -118,12 +118,64 @@ h2{
     width:150px;
 }
 
+#RSVP{
+    text-align: center;
+}
+
+#RSVP h2{
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    color:#ec43a1;
+}
+
+form#my-form{
+    text-align:center;
+}
+
+form#my-form * {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+#my-form label {
+    min-width: 200px;
+    text-align: left;
+}
+
+#my-form-button{
+    font-family: 'Dancing Script', cursive;
+    background: blue;
+    color: white;
+    border-radius: 5px;
+    width: 100px;
+}
 @media(max-width:800px){
+    #header{
+        background-size:500%;
+    }
     #header h1{
         padding-top:60px;
         font-size:52px;
     } 
     #header p{
         font-size:16px;
+    }
+
+    .timelineLeft{
+        text-align:left;
+    }
+
+    .timelineLeft p {
+        max-width: 250px;
+        float: none;
+    }
+    .orderMobile1{
+        order:1;
+    }
+    .orderMobile2{
+        order:2;
+    }
+    ul.nav{
+        display:none;
     }
 }
