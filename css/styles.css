@@ -215,6 +215,11 @@ body .modal {
     display:none;
 }
 
+.modal{
+    overflow-y:visible;
+    overflow-x:hidden;
+}
+
 .backgroundopacity{
     background-color:black;
     position:fixed;
