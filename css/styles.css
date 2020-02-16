@@ -216,8 +216,8 @@ body .modal {
 }
 
 .modal{
-    overflow-y:visible;
-    overflow-x:hidden;
+    overflow-y:visible !important;
+    overflow-x:hidden !important;
 }
 
 .backgroundopacity{
