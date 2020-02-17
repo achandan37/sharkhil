@@ -260,6 +260,8 @@ body .modal {
 
 .close{
     padding:20px;
+    position:fixed;
+    right:5vw;
 }
 
 .footer{
