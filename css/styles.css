@@ -213,11 +213,13 @@ body .modal {
     left: 0;
     right: 0;
     display:none;
+    padding:36px;
 }
 
 .modal{
     overflow-y:visible !important;
     overflow-x:hidden !important;
+    padding:36px;
 }
 
 .backgroundopacity{
@@ -237,7 +239,7 @@ body .modal {
     font-size:20px;
     width:80%;
     margin:auto;
-    padding:24px;
+    padding-top:24px;
 }
 
 .registry .row {
