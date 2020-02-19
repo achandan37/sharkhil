@@ -65,11 +65,22 @@
         },{
             transform:'scale(1.2)'
         });
-        var tween2 = TweenMax.fromTo('#header', 4, {
+        var tween2;
+        if(window.screen.width < 800){
+            var tween2 = TweenMax.fromTo('#header', 4, {
+            backgroundPositionY: '50%',
+        },{
+            backgroundPositionY: '0%',
+        });
+        }
+        else{
+            var tween2 = TweenMax.fromTo('#header', 4, {
             backgroundPositionY: '50%',
         },{
             backgroundPositionY: '30%',
         });
+        }
+        
         var tween3 = TweenMax.to('#headerText', 4, {
             position: 'absolute',
             left: 0,

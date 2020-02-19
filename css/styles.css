@@ -295,10 +295,10 @@ body .modal {
     }
     #header h1{
         padding-top:60px;
-        font-size:52px;
+        font-size:42px;
     } 
     #header p{
-        font-size:16px;
+        font-size:14px;
     }
 
     .timelineLeft{
@@ -343,5 +343,13 @@ body .modal {
         width: 100%;
         margin-left: 0%;
         padding: 12px;
+    }
+    .footer{
+        background-position:center;
+    }
+    .footer .footer-text {
+        right: unset;
+        left: 12px;
+        font-size: 32px;
     }
 }
